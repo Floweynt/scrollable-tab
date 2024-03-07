@@ -1,0 +1,33 @@
+{
+    "schemaVersion": 1,
+    "id": "scrollable-tab",
+    "version": "${version}",
+    "name": "Scrollable Tab",
+    "description": "Tab scrolling tech",
+    "authors": [
+        "Flowey"
+    ],
+    "contact": {
+        "repo": "https://github.com/flowey/scrollable-tab"
+    },
+    "license": "GPL-3.0",
+    "icon": "assets/scrollable-tab/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "com.floweytf.tabscroll.scrollabletab.ModClient"
+        ],
+        "modmenu": [
+            "com.floweytf.tabscroll.scrollabletab.ModMenuImpl"
+        ]
+    },
+    "mixins": [
+        "scrollable-tab.mixins.json"
+    ],
+    "depends": {
+        "fabricloader": ">=${loader_version}",
+        "minecraft": "${minecraft_version}",
+        "modmenu": "*",
+        "cloth-config2": "*"
+    }
+}

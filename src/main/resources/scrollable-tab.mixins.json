@@ -1,0 +1,13 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.floweytf.tabscroll.scrollabletab.mixin",
+    "compatibilityLevel": "JAVA_17",
+    "client": [
+        "MouseHandlerMixin",
+        "PlayerTabOverlayMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

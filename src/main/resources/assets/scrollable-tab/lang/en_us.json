@@ -1,0 +1,14 @@
+{
+    "scrollable-tab.config.title": "Scrollable Tab Configuration",
+    "scrollable-tab.config.category.main": "Main",
+    "scrollable-tab.config.scrollbarbg": "Scrollbar Background Color",
+    "scrollable-tab.config.scrollbarbg.tooltip": "The color to use for the background of the scrollbar (scrollbar is only displayed if necessary)",
+    "scrollable-tab.config.scrollbarfg": "Scrollbar Foreground Color",
+    "scrollable-tab.config.scrollbarfg.tooltip": "The color to use for the foreground of the scrollbar (scrollbar is only displayed if necessary)",
+    "scrollable-tab.config.maxrows": "Max Tab Menu Rows",
+    "scrollable-tab.config.maxrows.tooltip": "The amount of rows to be rendered in the tab menu",
+    "scrollable-tab.config.scrollbarwidth": "Scrollbar Width",
+    "scrollable-tab.config.scrollbarwidth.tooltip": "The width, in pixels, of the scrollbar",
+    "scrollable-tab.config.scrollbarincr": "Scrollbar Increment",
+    "scrollable-tab.config.scrollbarincr.tooltip": "The amount of players to move over scroll"
+}
