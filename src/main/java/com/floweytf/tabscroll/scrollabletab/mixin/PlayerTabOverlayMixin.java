@@ -2,6 +2,7 @@ package com.floweytf.tabscroll.scrollabletab.mixin;
 
 import com.floweytf.tabscroll.scrollabletab.Config;
 import com.floweytf.tabscroll.scrollabletab.IPlayerTabOverlay;
+import com.floweytf.tabscroll.scrollabletab.compat.betterping.BetterPingCompatHandler;
 import com.mojang.authlib.GameProfile;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -21,6 +22,9 @@ import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.criteria.ObjectiveCriteria;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -58,8 +62,18 @@ public abstract class PlayerTabOverlayMixin implements IPlayerTabOverlay {
      * @author Flowey
      * @reason I can't be bothered to write a well targeted mixin, sorry!
      */
-    @Overwrite
-    public void render(PoseStack poseStack, int screenWidth, Scoreboard scoreboard, @Nullable Objective objective) {
+    @Inject(
+        method = "render",
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    private void scrollable_tab$injectRender(PoseStack poseStack, int i, Scoreboard scoreboard, Objective objective, CallbackInfo ci) {
+        scrollable_tab$doRender(poseStack, i, scoreboard, objective);
+        ci.cancel();
+    }
+
+    @Unique
+    private void scrollable_tab$doRender(PoseStack poseStack, int screenWidth, Scoreboard scoreboard, @Nullable Objective objective) {
         final var infos = this.getPlayerInfos();
         final int players = infos.size();
         final var scrollbarWidth = Config.getInstance().scrollbarWidth;
@@ -98,6 +112,10 @@ public abstract class PlayerTabOverlayMixin implements IPlayerTabOverlay {
         if(currentTabSlice.size() < players) {
             entryWidth += scrollbarWidth; // add sufficient offset
             hasScrollbar = true;
+        }
+
+        if(BetterPingCompatHandler.callback != null) {
+            entryWidth += 45;
         }
 
         int width = entryWidth;
@@ -202,14 +220,28 @@ public abstract class PlayerTabOverlayMixin implements IPlayerTabOverlay {
                 info.getGameMode() == GameType.SPECTATOR ? -1862270977 : -1
             );
 
-            int nameEnd;
-            int objectiveEnd;
-
-            if (objective != null && info.getGameMode() != GameType.SPECTATOR && (objectiveEnd = (nameEnd = startX + maxNameWidth + 1) + objectiveWidth) - nameEnd > 5) {
-                this.renderTablistScore(objective, startY, gameProfile.getName(), nameEnd, objectiveEnd, gameProfile.getId(), poseStack);
+            if (objective != null && info.getGameMode() != GameType.SPECTATOR && objectiveWidth > 5) {
+                this.renderTablistScore(
+                    objective,
+                    startY,
+                    gameProfile.getName(),
+                    startX + maxNameWidth + 1, startX + maxNameWidth + 1 + objectiveWidth,
+                    gameProfile.getId(),
+                    poseStack
+                );
             }
 
-            this.renderPingIcon(poseStack, endX + 9, -(showFace ? 9 : 0), startY, info);
+            if (BetterPingCompatHandler.callback != null) {
+                BetterPingCompatHandler.callback.render(
+                    minecraft,
+                    (PlayerTabOverlay) (Object) this,
+                    poseStack,
+                    endX + 10, -(showFace ? 9 : 0), startY,
+                    info
+                );
+            } else {
+                this.renderPingIcon(poseStack, endX + 9, -(showFace ? 9 : 0), startY, info);
+            }
         }
 
         if (footerParts != null) {
