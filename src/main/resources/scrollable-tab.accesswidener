@@ -1,0 +1,5 @@
+accessWidener v2 named
+
+accessible class net/minecraft/client/gui/components/PlayerTabOverlay$HealthState
+accessible class net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry
+accessible method net/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry <init> (Lnet/minecraft/network/chat/Component;ILnet/minecraft/network/chat/Component;I)V
