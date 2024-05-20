@@ -24,7 +24,7 @@ public class MouseHandlerMixin {
         ),
         cancellable = true
     )
-    private void scrollable_tab$handleScroll(long l, double d, double e, CallbackInfo ci, @Local(ordinal = 2) int scrollAmount) {
+    private void scrollable_tab$handleScroll(long l, double d, double e, CallbackInfo ci, @Local int scrollAmount) {
         var tab = (IPlayerTabOverlay) minecraft.gui.getTabList();
         if(tab.scrollable_tab$isVisible()) {
             tab.scrollable_tab$handle(scrollAmount * Config.getInstance().scrollbarIncrement);
