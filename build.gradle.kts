@@ -24,12 +24,12 @@ dependencies {
     minecraft("com.mojang:minecraft:${minecraft_version_dev}")
     mappings(loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.20.6:2024.05.01@zip")
+        parchment("org.parchmentmc.data:parchment-1.20.2:2023.12.10@zip")
     })
     modImplementation("net.fabricmc:fabric-loader:${loader_version}")
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:14.0.126")
-    modApi("com.terraformersmc:modmenu:10.0.0-beta.1")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:12.0.119")
+    modApi("com.terraformersmc:modmenu:8.0.1")
 }
 
 loom {
