@@ -28,8 +28,8 @@ dependencies {
     })
     modImplementation("net.fabricmc:fabric-loader:${loader_version}")
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:14.0.126")
-    modApi("com.terraformersmc:modmenu:10.0.0-beta.1")
+    modApi("me.shedaniel.cloth:cloth-config-fabric:12.0.119")
+    modApi("com.terraformersmc:modmenu:8.0.1")
 }
 
 loom {
