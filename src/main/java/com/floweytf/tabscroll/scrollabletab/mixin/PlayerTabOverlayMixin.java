@@ -205,7 +205,7 @@ public abstract class PlayerTabOverlayMixin implements IPlayerTabOverlay {
                 Player player = this.minecraft.level.getPlayerByUUID(gameProfile.getId());
                 boolean isUpsideDown = player != null && LivingEntityRenderer.isEntityUpsideDown(player);
                 boolean hasHat = player != null && player.isModelPartShown(PlayerModelPart.HAT);
-                PlayerFaceRenderer.draw(graphics, info.getSkin().texture(), startX, startY, 8, hasHat, isUpsideDown);
+                PlayerFaceRenderer.draw(graphics, info.getSkinLocation(), startX, startY, 8, hasHat, isUpsideDown);
                 startX += 9;
             }
 
