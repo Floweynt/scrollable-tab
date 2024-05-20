@@ -24,15 +24,16 @@ dependencies {
     minecraft("com.mojang:minecraft:${minecraft_version_dev}")
     mappings(loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-1.19.4:2023.06.26@zip")
+        parchment("org.parchmentmc.data:parchment-1.20.6:2024.05.01@zip")
     })
     modImplementation("net.fabricmc:fabric-loader:${loader_version}")
 
-    modApi("me.shedaniel.cloth:cloth-config-fabric:10.1.117") {
-        exclude(group = "net.fabricmc.fabric-api")
-    }
+    modApi("me.shedaniel.cloth:cloth-config-fabric:14.0.126")
+    modApi("com.terraformersmc:modmenu:10.0.0-beta.1")
+}
 
-    modApi("com.terraformersmc:modmenu:6.2.1")
+loom {
+    accessWidenerPath = file("src/main/resources/scrollable-tab.accesswidener")
 }
 
 tasks {
@@ -60,7 +61,7 @@ tasks {
     }
 }
 
-val targetJavaVersion = 17
+val targetJavaVersion = 21
 tasks.withType<JavaCompile>().configureEach {
     options.encoding = "UTF-8"
     options.release.set(targetJavaVersion)
